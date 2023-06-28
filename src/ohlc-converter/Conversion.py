@@ -6,7 +6,6 @@ Conversion module. Provides function to convert data to OHLC format.
 """
 import pandas as pd
 
-
 def convert_to_ohlc(tick_data: pd.DataFrame, period: str) -> pd.DataFrame:
     """
         Converts data to OHLC format
@@ -19,8 +18,10 @@ def convert_to_ohlc(tick_data: pd.DataFrame, period: str) -> pd.DataFrame:
     LAST_PRICE = "<LAST>"
     VOLUME = "<VOL>"
 
-    ohlc_data = tick_data[LAST_PRICE].resample(period).ohlc()
-    ohlc_data[VOLUME] = tick_data[VOLUME].resample(period).sum()
+    # resample datetime, calculate ohlc for last price and sum for volume
+    ohlc_data = tick_data.resample(period).agg({LAST_PRICE: 'ohlc', VOLUME: 'sum'})
 
-    # filter for not empty fields and return
-    return ohlc_data[ohlc_data.open.notna()]
+    # drops first-level headers and filters for not empty fields
+    ohlc_data = pd.concat([ohlc_data[LAST_PRICE], ohlc_data[VOLUME]], axis=1).dropna()
+
+    return ohlc_data
