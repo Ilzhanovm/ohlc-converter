@@ -10,6 +10,7 @@ Requires pandas for core operations. Matplotlib and mplfinance are required for 
 - Headers: <TICKER>, <DATE>, <TIME>, <LAST>, <VOL>
 - Date format: YYYYMMDD
 - Time format: HHMMSS
+
 ### Example data:
 ```
 <TICKER>,<DATE>,<TIME>,<LAST>,<VOL>
@@ -17,6 +18,10 @@ STOCKNAME,20230610,100000,160.500000000,20
 STOCKNAME,20230610,100001,160.550000000,10
 STOCKNAME,20230610,100002,160.510000000,10
 ```
+
+## Output data format
+- Headers: datetime, open, high, low, close, <VOL>
+- output file name TICKER_<output>, where <output> is specified in args
 
 ## Usage
 

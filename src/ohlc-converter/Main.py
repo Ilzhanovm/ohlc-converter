@@ -28,7 +28,7 @@ def main():
             visualize(name, ohlc_data)
 
         if config.output_file:
-            save_date(ohlc_data, config.output_file)
+            save_date(ohlc_data, name + '_' + config.output_file)
 
 
 if __name__ == '__main__':
