@@ -7,7 +7,7 @@ Converts tick-by-tick stock market data to OHLC format. Supports visualization w
 Requires pandas for core operations. Matplotlib and mplfinance are required for visualization.
 
 ## Input data format
-- Headers: <TICKER>, <DATE>, <TIME>, <LAST>, <VOL>
+- Headers: TICKER, DATE, TIME, LAST, VOL
 - Date format: YYYYMMDD
 - Time format: HHMMSS
 
@@ -20,8 +20,8 @@ STOCKNAME,20230610,100002,160.510000000,10
 ```
 
 ## Output data format
-- Headers: datetime, open, high, low, close, <VOL>
-- output file name TICKER_<output>, where <output> is specified in args
+- Headers: datetime, open, high, low, close, VOL
+- output file name /ticker_name/_/output/, where /output/ is specified in args
 
 ## Usage
 
