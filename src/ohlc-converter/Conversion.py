@@ -22,4 +22,5 @@ def convert_to_ohlc(tick_data: pd.DataFrame, period: str) -> pd.DataFrame:
     ohlc_data = tick_data[LAST_PRICE].resample(period).ohlc()
     ohlc_data[VOLUME] = tick_data[VOLUME].resample(period).sum()
 
+    # filter for not empty fields and return
     return ohlc_data[ohlc_data.open.notna()]

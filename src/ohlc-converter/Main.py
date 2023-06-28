@@ -21,6 +21,7 @@ def main():
         print(f"ERROR: can't read from {config.input_file}")
         return
 
+    # for every <TICKER> in input data
     for name, data in tick_data.items():
         ohlc_data = convert_to_ohlc(data, config.period)
 

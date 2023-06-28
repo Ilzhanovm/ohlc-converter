@@ -33,6 +33,7 @@ def get_data(file_name: str) -> Dict[str, pd.DataFrame]:
     TICKER_FIELD = "<TICKER>"
     RETURNING_FIELDS = ["<TICKER>", "<LAST>", "<VOL>"]
 
+    # stores DataFrame for each <TICKER>
     data_frames: Dict[str, pd.DataFrame] = {}
 
     try:
@@ -40,12 +41,18 @@ def get_data(file_name: str) -> Dict[str, pd.DataFrame]:
     except FileNotFoundError:
         return data_frames
 
+    # for every <TICKER> in input data
     for ticker in data[TICKER_FIELD].unique():
+        # filter DataFrame to contains only one <TICKER>
         _data = data[data[TICKER_FIELD] == ticker].copy()
+
+        # combine date and time columns into single datetime column
         _data["datetime"] = pd.to_datetime(
             _data[DATE_FIELD].astype(str) + _data[TIME_FIELD].astype(str),
             format=DATETIME_FORMAT
         )
+
+        # set datetime to be index and filter for necessary fields
         data_frames[ticker] = _data.set_index("datetime")[RETURNING_FIELDS]
 
     return data_frames
