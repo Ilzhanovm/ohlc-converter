@@ -1,0 +1,23 @@
+[project]
+name = "ohlc-converter"
+version = "1.0.0"
+authors = [
+  { name="Magsat Ilzhanov", email="ilzhanovm@gmail.com" },
+]
+description = "Converts tick-by-tick data to ohlc"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "pandas",
+    "matplotlib",
+    "mplfinance",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
