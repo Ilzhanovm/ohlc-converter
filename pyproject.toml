@@ -1,6 +1,6 @@
 [project]
 name = "ohlc-converter"
-version = "1.0.0"
+version = "1.1.0"
 authors = [
   { name="Magsat Ilzhanov", email="ilzhanovm@gmail.com" },
 ]

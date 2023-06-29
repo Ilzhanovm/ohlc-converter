@@ -16,6 +16,7 @@ def get_configuration() -> argparse.Namespace:
 
     parser = argparse.ArgumentParser(description="Convert tick-by-tick data to ohlc format")
     parser.add_argument('-v', '--visualize', action='store_true',   help="Show matplotlib's ohlc chart")
+    parser.add_argument('-c', '--clusters', action='store_true',    help="Calculate clusters for each candlestick")
     parser.add_argument('-p', '--period', default='3h',             help="Period for ohlc data, defaults to '3h'")
     parser.add_argument('input_file', type=str,                     help="Input file")
     parser.add_argument('-o', '--output_file',                      help="Output file")

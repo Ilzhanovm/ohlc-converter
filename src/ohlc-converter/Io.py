@@ -24,11 +24,12 @@ def get_data(file_name: str) -> Dict[str, pd.DataFrame]:
 
     :param str file_name: name of the input file
 
-    :return: pandas DataFrame with data
+    :return: dictionary with pandas' DataFrames in {<TICKER>: DATA} format
     """
-    DATETIME_FORMAT = "%Y%m%d%H%M%S"
+    DATETIME_FORMAT = "%Y%m%d %H%M%S"
     DATE_FIELD = "<DATE>"
     TIME_FIELD = "<TIME>"
+    DATE_TIME_FIELD = "<DATE>_<TIME>"
 
     TICKER_FIELD = "<TICKER>"
     RETURNING_FIELDS = ["<TICKER>", "<LAST>", "<VOL>"]
@@ -37,20 +38,21 @@ def get_data(file_name: str) -> Dict[str, pd.DataFrame]:
     data_frames: Dict[str, pd.DataFrame] = {}
 
     try:
-        data = pd.read_csv(file_name)
+        data = pd.read_csv(
+            file_name,
+            parse_dates=[[DATE_FIELD, TIME_FIELD]],
+            date_format=DATETIME_FORMAT
+        )
     except FileNotFoundError:
         return data_frames
+
+    # rename datetime column according to conventions
+    data = data.rename(columns={DATE_TIME_FIELD: "datetime"})
 
     # for every <TICKER> in input data
     for ticker in data[TICKER_FIELD].unique():
         # filter DataFrame to contains only one <TICKER>
         _data = data[data[TICKER_FIELD] == ticker].copy()
-
-        # combine date and time columns into single datetime column
-        _data["datetime"] = pd.to_datetime(
-            _data[DATE_FIELD].astype(str) + _data[TIME_FIELD].astype(str),
-            format=DATETIME_FORMAT
-        )
 
         # set datetime to be index and filter for necessary fields
         data_frames[ticker] = _data.set_index("datetime")[RETURNING_FIELDS]

@@ -1,3 +1,4 @@
 src/ohlc_converter.egg-info
 dist
 src/ohlc-converter/GAZP.csv
+src/.DS_Store
