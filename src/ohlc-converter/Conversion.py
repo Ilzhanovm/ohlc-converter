@@ -21,7 +21,7 @@ def convert_to_ohlc(tick_data: pd.DataFrame, period: str, calculate_clusters: bo
     LAST_PRICE = "<LAST>"
     VOLUME = "<VOL>"
 
-    ohlc_data = {}
+    ohlc_data: Dict[str, pd.DataFrame] = {}
 
     # resample datetime, calculate ohlc for last price and sum for volume
     resampled_data = tick_data.resample(period)
